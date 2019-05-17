@@ -9,6 +9,45 @@
         $(document).ready(function () {
 
             getUserData();
+            showProduct();
+            function showProduct() {
+
+                let url = "http://localhost:59017/api/product";
+                let accesstoken = localStorage.getItem("token");
+
+                $.ajax({
+                    type: "GET",
+                    crossDomain: true,
+                    url: url,
+                    beforeSend: function (xhr) {
+                        xhr.setRequestHeader("Authorization", "Bearer " + accesstoken)
+
+                    },
+                    success: function (products) {
+                        var table = `<table class="table table-bordered"><tr><th>Id</th><th>İsim</th><th>Fiyat</th><th>Kategori</th></tr>`;
+
+                        $.each(products, (key, val) => {
+
+                            table += `<tr><td>${val.id}</td><td>${val.name}</td><td>${val.price}</td><td>${val.category}</td></tr>`
+
+                        })
+
+                        table += "</table>";
+
+                        $("#productDiv").html(table);
+
+                    },
+                    error: function (error) {
+
+                        $("#productDiv").html("token geçersiz olduğu için veya token bulunamadığı için ürünler getirilememiştir.");
+
+                    },
+                    contentType: "application/json",
+                    dataType: "json"
+
+                })
+
+            }
 
             $("#btnSave").click(function () {
 
@@ -189,5 +228,9 @@
                 </form>
             </div>
         </div>
+    </div>
+    <div class="row">
+
+        <div id="productDiv"></div>
     </div>
 </div>
