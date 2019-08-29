@@ -32,15 +32,15 @@ namespace UdemyApiWithToken.Controllers
 
             string userId = claims.Where(c => c.Type == ClaimTypes.NameIdentifier).First().Value;
 
-            UserResponse userResponse = userService.FindById(int.Parse(userId));
+            BaseResponse<User> userResponse = userService.FindById(int.Parse(userId));
 
             if (userResponse.Success)
             {
-                return Ok(userResponse.user);
+                return Ok(userResponse.Extra);
             }
             else
             {
-                return BadRequest(userResponse.Message);
+                return BadRequest(userResponse.ErrorMessage);
             }
         }
 
@@ -50,15 +50,15 @@ namespace UdemyApiWithToken.Controllers
         {
             User user = mapper.Map<UserResource, User>(userResource);
 
-            UserResponse userResponse = userService.AddUser(user);
+            BaseResponse<User> userResponse = userService.AddUser(user);
 
             if (userResponse.Success)
             {
-                return Ok(userResponse.user);
+                return Ok(userResponse.Extra);
             }
             else
             {
-                return BadRequest(userResponse.Message);
+                return BadRequest(userResponse.ErrorMessage);
             }
         }
     }

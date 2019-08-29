@@ -1,13 +1,14 @@
 ﻿using UdemyApiWithToken.Domain.Responses;
+using UdemyApiWithToken.Security.Token;
 
 namespace UdemyApiWithToken.Domain.Services
 {
     public interface IAuthenticationService
     {
-        AccessTokenResponse CreateAccessToken(string email, string password);
+        BaseResponse<AccessToken> CreateAccessToken(string email, string password);
 
-        AccessTokenResponse CreateAccessTokenByRefreshToken(string refreshToken);
+        BaseResponse<AccessToken> CreateAccessTokenByRefreshToken(string refreshToken);
 
-        AccessTokenResponse RevokeRefreshToken(string refreshToken);
+        BaseResponse<AccessToken> RevokeRefreshToken(string refreshToken);
     }
 }

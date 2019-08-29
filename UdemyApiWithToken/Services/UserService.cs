@@ -19,21 +19,21 @@ namespace UdemyApiWithToken.Services
             this.unitOfWork = unitOfWork;
         }
 
-        public UserResponse AddUser(User user)
+        public BaseResponse<User> AddUser(User user)
         {
             try
             {
                 userRepository.AddUser(user);
                 unitOfWork.Complete();
-                return new UserResponse(user);
+                return new BaseResponse<User>(user);
             }
             catch (Exception ex)
             {
-                return new UserResponse($"Kullanıcı eklenirken bir hata meydana geldi:{ex.Message}");
+                return new BaseResponse<User>($"Kullanıcı eklenirken bir hata meydana geldi:{ex.Message}");
             }
         }
 
-        public UserResponse FindById(int userId)
+        public BaseResponse<User> FindById(int userId)
         {
             try
             {
@@ -41,38 +41,38 @@ namespace UdemyApiWithToken.Services
 
                 if (user == null)
                 {
-                    return new UserResponse("Kullanıcı bulunamadı.");
+                    return new BaseResponse<User>("Kullanıcı bulunamadı.");
                 }
 
-                return new UserResponse(user);
+                return new BaseResponse<User>(user);
             }
             catch (Exception ex)
             {
-                return new UserResponse($"Kullanıcı bulunurken bir hata meydana geldi:{ex.Message}");
+                return new BaseResponse<User>($"Kullanıcı bulunurken bir hata meydana geldi:{ex.Message}");
             }
         }
 
-        public UserResponse FindEmailAndPassword(string email, string password)
+        public BaseResponse<User> FindEmailAndPassword(string email, string password)
         {
             try
             {
                 User user = userRepository.FindByEmailandPassword(email, password);
                 if (user == null)
                 {
-                    return new UserResponse("Kullanıcı bulunamadı.");
+                    return new BaseResponse<User>("Kullanıcı bulunamadı.");
                 }
                 else
                 {
-                    return new UserResponse(user);
+                    return new BaseResponse<User>(user);
                 }
             }
             catch (Exception ex)
             {
-                return new UserResponse($"Kullanıcı bulunurken bir hata meydana geldi:{ex.Message}");
+                return new BaseResponse<User>($"Kullanıcı bulunurken bir hata meydana geldi:{ex.Message}");
             }
         }
 
-        public UserResponse GetUserWithRefreshToken(string refreshToken)
+        public BaseResponse<User> GetUserWithRefreshToken(string refreshToken)
         {
             try
             {
@@ -80,16 +80,16 @@ namespace UdemyApiWithToken.Services
 
                 if (user == null)
                 {
-                    return new UserResponse("Kullanıcı bulunamadı.");
+                    return new BaseResponse<User>("Kullanıcı bulunamadı.");
                 }
                 else
                 {
-                    return new UserResponse(user);
+                    return new BaseResponse<User>(user);
                 }
             }
             catch (Exception ex)
             {
-                return new UserResponse($"Kullanıcı bulunurken bir hata meydana geldi:{ex.Message}");
+                return new BaseResponse<User>($"Kullanıcı bulunurken bir hata meydana geldi:{ex.Message}");
             }
         }
 
