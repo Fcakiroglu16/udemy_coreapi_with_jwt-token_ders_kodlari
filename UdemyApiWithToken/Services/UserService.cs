@@ -11,9 +11,9 @@ namespace UdemyApiWithToken.Services
     {
         private readonly IUserRepository userRepository;
 
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IUnitOfWork<UdemyApiWithTokenDBContext> unitOfWork;
 
-        public UserService(IUserRepository userRepository, IUnitOfWork unitOfWork)
+        public UserService(IUserRepository userRepository, IUnitOfWork<UdemyApiWithTokenDBContext> unitOfWork)
         {
             this.userRepository = userRepository;
             this.unitOfWork = unitOfWork;

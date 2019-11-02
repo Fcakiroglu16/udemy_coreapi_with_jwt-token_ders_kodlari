@@ -1,12 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace UdemyApiWithToken.Domain.UnitOfWork
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork<T> : IUnitOfWork<T> where T : DbContext
     {
-        private readonly UdemyApiWithTokenDBContext context;
+        private readonly T context;
 
-        public UnitOfWork(UdemyApiWithTokenDBContext context)
+        public UnitOfWork(T context)
         {
             this.context = context;
         }

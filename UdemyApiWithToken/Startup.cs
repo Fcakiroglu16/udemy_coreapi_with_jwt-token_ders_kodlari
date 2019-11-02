@@ -36,8 +36,8 @@ namespace UdemyApiWithToken
             services.AddScoped<ITokenHandler, TokenHandler>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+            //services.AddScoped < IUnitOfWork, typeof(UnitOfWork<>) > ();
+            services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddCors(opts =>

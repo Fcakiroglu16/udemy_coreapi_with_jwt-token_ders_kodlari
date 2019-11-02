@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using UdemyApiWithToken.Domain;
 using UdemyApiWithToken.Domain.Repositories;
 using UdemyApiWithToken.Domain.Responses;
 using UdemyApiWithToken.Domain.Services;
@@ -12,9 +13,9 @@ namespace UdemyApiWithToken.Services
     public class GenericService<T> : IGenericService<T> where T : class
     {
         private readonly IGenericRepository<T> genericRepository;
-        private readonly IUnitOfWork unitOfWork;
+        private readonly IUnitOfWork<UdemyApiWithTokenDBContext> unitOfWork;
 
-        public GenericService(IGenericRepository<T> genericRepository, IUnitOfWork unitOfWork)
+        public GenericService(IGenericRepository<T> genericRepository, IUnitOfWork<UdemyApiWithTokenDBContext> unitOfWork)
         {
             this.genericRepository = genericRepository;
             this.unitOfWork = unitOfWork;
